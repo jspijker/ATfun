@@ -1,9 +1,8 @@
 
 #Create wrapper around samanapir function
-wrap_GetSamenMetenAPIinfoProject <- function(project) {
+local_mocked_bindings(wrap_GetSamenMetenAPIinfoProject = function(project) {
     return(projinfo_amersfoort)
-}
-
+})
 
 test_that("download_lml_data wrapper", {
     x <- api_get_project_info("Amersfoort", conn = dbconn)

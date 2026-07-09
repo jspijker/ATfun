@@ -18,7 +18,7 @@ download_data_lml <- function(x, station) {
     } else {
         lml_data <- lml_data |>
             dplyr::rename("station" = "station_number", "timestamp" = "timestamp_measured", "parameter" = "formula") |>
-            dplyr::drop_na() |>
+            tidyr::drop_na() |>
             dplyr::mutate(aggregation = 3600) |>
             dplyr::mutate(parameter = tolower(parameter))
     }
@@ -27,5 +27,5 @@ download_data_lml <- function(x, station) {
 
 
 wrap_GetLMLstatdataAPI <- function(station, ts_api, te_api) {
-  return(samanapir::GetLMLstatdataAPI(station, ts_api, te_api))
+    return(samanapir::GetLMLstatdataAPI(station, ts_api, te_api))
 }

@@ -32,7 +32,3 @@ project <- "Amersfoort"
 
 # set default LML station
 lmlstation <- "NL49680"
-
-
-
-
