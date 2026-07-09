@@ -83,26 +83,26 @@ station_exists <- function(station, conn) {
 #     return(projectinfo)
 # }
 #
-api_get_municipality_info <- function(municipality, conn) {
-    # gets municipality info from the API
-    # arguments:
-    #   municipality: name of the municipality
-
-    m <- ATdatabase::get_doc("application", "municipalities", conn = conn) %>%
-                  rename(code = X1, name = X2)
-
-    gemid <- m %>%
-          filter(name == municipality) %>%
-          pull(code) %>%
-          as.character()
-
-    log_debug(paste0("getting municipality info for ", municipality))
-    muni_info <- samanapir::GetSamenMetenAPIinfoMuni(gemid)
-    add_doc("municipality", municipality, muni_info,
-            conn = conn, overwrite = TRUE)
-    return(muni_info)
-}
-
+# api_get_municipality_info <- function(municipality, conn) {
+#     # gets municipality info from the API
+#     # arguments:
+#     #   municipality: name of the municipality
+#
+#     m <- ATdatabase::get_doc("application", "municipalities", conn = conn) %>%
+#                   rename(code = X1, name = X2)
+#
+#     gemid <- m %>%
+#           filter(name == municipality) %>%
+#           pull(code) %>%
+#           as.character()
+#
+#     log_debug(paste0("getting municipality info for ", municipality))
+#     muni_info <- samanapir::GetSamenMetenAPIinfoMuni(gemid)
+#     add_doc("municipality", municipality, muni_info,
+#             conn = conn, overwrite = TRUE)
+#     return(muni_info)
+# }
+#
 
 download_sensor_meta <- function(name, type, conn = pool) {
     # this function downloads a set of sensors belonging to either a

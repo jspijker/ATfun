@@ -22,13 +22,13 @@ date_range <- tibble::tibble(
     end_date = start_date + lubridate::days(7)
 )
 
-date_range_fixed <- tibble::tibble(
-    start_date = as.Date("2024-01-01"),
-    end_date = as.Date("2024-01-08")
-)
+#date_range_fixed is stored in sysdata.rda
 
 # Set default project
 project <- "Amersfoort"
 
 # set default LML station
 lmlstation <- "NL49680"
+
+# set default municipality
+municipality <- "Amersfoort"
