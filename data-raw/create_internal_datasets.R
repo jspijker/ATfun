@@ -37,10 +37,10 @@ gemid <- municipalities %>%
     pull(code) %>%
     as.character()
 
-municipcinfo_amersfoort <- samanapir::GetSamenMetenAPIinfoMuni(gemid)
+municipinfo_amersfoort <- samanapir::GetSamenMetenAPIinfoMuni(gemid)
 
 
 usethis::use_data(projinfo_amersfoort, lml_example, municipalities,
-                  municipcinfo_amersfoort, date_range_fixed,
+                  municipinfo_amersfoort, date_range_fixed,
                   overwrite = TRUE, internal = TRUE)
 

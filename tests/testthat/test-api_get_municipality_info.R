@@ -1,7 +1,7 @@
 
 
 local_mocked_bindings(wrap_GetSamenMetenAPIinfoMuni = function(gemid) {
-    return(municipcinfo_amersfoort)
+    return(municipinfo_amersfoort)
 })
 
 
