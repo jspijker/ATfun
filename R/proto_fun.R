@@ -196,51 +196,6 @@ download_sensor_meta <- function(name, type, conn = pool) {
 }
 
 
-get_stations_from_selection <- function(name, type, conn = pool) {
-    # this function gets all the stations belonging to the selected
-    # project of municipality.
-    # It returns a vector with stations ids (kit_ids), this vector can
-    # then be used to download measurement data
-    # The type arguments determine if data is requested for a
-    # municpality or a project.
-    # arguments:
-    #    name: name of project or municipality
-    #    type: either 'project' or 'municipality'
-    #    conn: db connection object
-
-    switch(type,
-           project = {
-               info <- ATdatabase::get_doc(type = "project", ref = name, conn = conn)
-           },
-           municipality = {
-               info <- ATdatabase::get_doc(type = "municipality", ref = name, conn = conn)
-           },
-           { #unknown type
-               stop("download_sensor_meta: unknown type")
-           })
-
-      # Check if municipality in database exists
-      if(!is.list(info)){
-        return(NULL)
-      }
-
-      # Get the stations: first the sensors
-      sensors <- info$sensor_data %>% dplyr::pull(kit_id)
-      # Get the KNMI stations
-      knmi <- info$sensor_data %>% dplyr::pull(knmicode) %>% unique() %>% sub("knmi_06", "KNMI_",.)
-      # Get the reference stations
-      refstation <- info$sensor_data %>%
-        dplyr::select(dplyr::starts_with("pm")) %>%
-        tidyr::pivot_longer(cols = dplyr::starts_with("pm"), names_to ="stat") %>%
-        dplyr::pull(value) %>%
-        unique()
-
-      # Combine all station names
-      stations <- c(sensors, knmi, refstation)
-
-    return(stations)
-}
-
 round_to_days <- function(time_start, time_end) {
     # the samen meten API requires time ranges in full days. This
     # function rounds any time to the start of the day of time_start
