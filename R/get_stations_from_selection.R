@@ -23,43 +23,44 @@
 #' }
 #'
 #' @export
+
 get_stations_from_selection <- function(name, type, conn = pool) {
 
-  info <- switch(
-    type,
-    project = {
-      ATdatabase::get_doc(type = "project", ref = name, conn = conn)
-    },
-    municipality = {
-      ATdatabase::get_doc(type = "municipality", ref = name, conn = conn)
-    },
-    {
-      stop("download_sensor_meta: unknown type")
+    info <- switch(
+        type,
+        project = {
+            ATdatabase::get_doc(type = "project", ref = name, conn = conn)
+        },
+        municipality = {
+            ATdatabase::get_doc(type = "municipality", ref = name, conn = conn)
+        },
+        {
+            stop("download_sensor_meta: unknown type")
+        }
+    )
+
+    if (!is.list(info)) {
+        return(NULL)
     }
-  )
 
-  if (!is.list(info)) {
-    return(NULL)
-  }
+    sensors <- info$sensor_data |>
+        dplyr::pull(kit_id)
 
-  sensors <- info$sensor_data |>
-    dplyr::pull(kit_id)
+    knmi <- info$sensor_data |>
+        dplyr::pull(knmicode) |>
+        unique()
+    knmi <- sub("knmi_06", "KNMI_", knmi)
 
-  knmi <- info$sensor_data |>
-    dplyr::pull(knmicode) |>
-    unique() |>
-    sub("knmi_06", "KNMI_", .)
+    ref_station <- info$sensor_data |>
+        dplyr::select(dplyr::starts_with("pm")) |>
+        tidyr::pivot_longer(
+            cols = dplyr::starts_with("pm"),
+            names_to = "stat"
+        ) |>
+        dplyr::pull(value) |>
+        unique()
 
-  ref_station <- info$sensor_data |>
-    dplyr::select(dplyr::starts_with("pm")) |>
-    tidyr::pivot_longer(
-      cols = dplyr::starts_with("pm"),
-      names_to = "stat"
-    ) |>
-    dplyr::pull(value) |>
-    unique()
+    stations <- c(sensors, knmi, ref_station)
 
-  stations <- c(sensors, knmi, ref_station)
-
-  return(stations)
+    return(stations)
 }
