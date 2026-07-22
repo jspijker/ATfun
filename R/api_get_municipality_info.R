@@ -1,3 +1,16 @@
+#' Get municipality info from the SamenMeten API
+#'
+#' @param municipality Name of the municipality
+#' @param conn Database connection
+#' @return List with municipality info
+
+#' the function retrieves municipality information from the SamenMeten
+#' API based on the provided municipality name. It uses the
+#' municipality code to fetch the data and stores it in the database.
+
+#' @export
+
+
 
 api_get_municipality_info <- function(municipality, conn) {
     # gets municipality info from the API

@@ -104,97 +104,97 @@ station_exists <- function(station, conn) {
 # }
 #
 
-download_sensor_meta <- function(name, type, conn = pool) {
-    # this function downloads a set of sensors belonging to either a
-    # project or municipality,  download the station meta data, and
-    # downloads the measurements for the requested time range
-    # The type arguments determine if data is requested for a
-    # municpality or a project.
-    # arguments:
-    #    name: name of project or municipality
-    #    type: either 'project' or 'municipality'
-    #    conn: db connection object
-
-    #--
-    # vectorized helper functions
-
-    insert_location_info_vectorized <- function(x, conn = conn) {
-        kit <- x %>%
-            as_tibble_row()  %>%
-            mutate(lat = as.numeric(lat)) %>%
-            mutate(lon = as.numeric(lon))
-        log_trace("storing location info for {kit$kit_id}")
-        insert_location_info(station = kit$kit_id,
-                             lat = kit$lat,
-                             lon = kit$lon,
-                             conn)
-    }
-
-    store_sensor <- function(x, type = "station", conn = conn) {
-
-        ref <- x[["kit_id"]]
-        doc <- x %>%
-            as_tibble_row()
-        if(!doc_exists(type, ref, conn = conn)) {
-            log_trace("storing meta data info for {ref}")
-            add_doc(type, ref, doc, conn = conn)
-        } else {
-            log_trace("skipping store meta data info for {ref}")
-        }
-
-    }
-
-    #--
-
-
-    switch(type,
-           project = {
-               projinfo <- api_get_project_info(name, conn = conn)
-           },
-           municipality = {
-               projinfo <- api_get_municipality_info(name, conn = conn)
-           },
-           { #unknown type
-               stop("download_sensor_meta: unknown type")
-           })
-
-    stations <- projinfo$sensor_data %>%
-        select(kit_id, lat, lon) %>%
-        as_tibble
-
-    sensors_meta <- projinfo$sensor_data %>%
-        select(-lat, -lon) %>%
-        as_tibble()
-
-    log_debug(paste("Got", nrow(stations), "stations for project", name))
-    apply(stations, 1, FUN  = insert_location_info_vectorized, conn = conn)
-
-
-    apply(sensors_meta, 1, FUN=store_sensor, conn=conn)
-
-
-    datastreams <- projinfo$datastream_data
-
-    for(i in unique(datastreams$kit_id)) {
-        kit <- datastreams %>%
-            filter(kit_id == i) %>%
-            select(-kit_id)
-
-
-        type <- "datastream"
-        if(!doc_exists(type, ref = i, conn = conn)) {
-            log_trace("storing stream data info for {i}")
-            add_doc(type, ref = i, doc = kit, conn = conn)
-        } else {
-            log_trace("skipping store stream data info for {i}")
-
-        }
-
-    }
-
-
-}
-
+# download_sensor_meta <- function(name, type, conn = pool) {
+#     # this function downloads a set of sensors belonging to either a
+#     # project or municipality,  download the station meta data, and
+#     # downloads the measurements for the requested time range
+#     # The type arguments determine if data is requested for a
+#     # municpality or a project.
+#     # arguments:
+#     #    name: name of project or municipality
+#     #    type: either 'project' or 'municipality'
+#     #    conn: db connection object
+#
+#     #--
+#     # vectorized helper functions
+#
+#     insert_location_info_vectorized <- function(x, conn = conn) {
+#         kit <- x %>%
+#             as_tibble_row()  %>%
+#             mutate(lat = as.numeric(lat)) %>%
+#             mutate(lon = as.numeric(lon))
+#         log_trace("storing location info for {kit$kit_id}")
+#         insert_location_info(station = kit$kit_id,
+#                              lat = kit$lat,
+#                              lon = kit$lon,
+#                              conn)
+#     }
+#
+#     store_sensor <- function(x, type = "station", conn = conn) {
+#
+#         ref <- x[["kit_id"]]
+#         doc <- x %>%
+#             as_tibble_row()
+#         if(!doc_exists(type, ref, conn = conn)) {
+#             log_trace("storing meta data info for {ref}")
+#             add_doc(type, ref, doc, conn = conn)
+#         } else {
+#             log_trace("skipping store meta data info for {ref}")
+#         }
+#
+#     }
+#
+#     #--
+#
+#
+#     switch(type,
+#            project = {
+#                projinfo <- api_get_project_info(name, conn = conn)
+#            },
+#            municipality = {
+#                projinfo <- api_get_municipality_info(name, conn = conn)
+#            },
+#            { #unknown type
+#                stop("download_sensor_meta: unknown type")
+#            })
+#
+#     stations <- projinfo$sensor_data %>%
+#         select(kit_id, lat, lon) %>%
+#         as_tibble
+#
+#     sensors_meta <- projinfo$sensor_data %>%
+#         select(-lat, -lon) %>%
+#         as_tibble()
+#
+#     log_debug(paste("Got", nrow(stations), "stations for project", name))
+#     apply(stations, 1, FUN  = insert_location_info_vectorized, conn = conn)
+#
+#
+#     apply(sensors_meta, 1, FUN=store_sensor, conn=conn)
+#
+#
+#     datastreams <- projinfo$datastream_data
+#
+#     for(i in unique(datastreams$kit_id)) {
+#         kit <- datastreams %>%
+#             filter(kit_id == i) %>%
+#             select(-kit_id)
+#
+#
+#         type <- "datastream"
+#         if(!doc_exists(type, ref = i, conn = conn)) {
+#             log_trace("storing stream data info for {i}")
+#             add_doc(type, ref = i, doc = kit, conn = conn)
+#         } else {
+#             log_trace("skipping store stream data info for {i}")
+#
+#         }
+#
+#     }
+#
+#
+# }
+#
 
 round_to_days <- function(time_start, time_end) {
     # the samen meten API requires time ranges in full days. This
