@@ -221,50 +221,50 @@ round_to_days <- function(time_start, time_end) {
     return(res)
 }
 
-download_data_samenmeten <- function(x, station, conn ) {
-
-    streaminfo <- get_doc(type = "datastream", ref = station, conn)
-    if(length(streaminfo) == 1 && is.na(streaminfo)) {
-        log_warn("download_data_samenmeten: datastream {station} is empty") 
-        return(NULL)
-    } else {
-        streams <- streaminfo %>% pull(datastream_id)
-        streams_desc <- streaminfo %>% select(datastream_id, kit_id_ext)
-    }
-
-    ts_api <- strftime(as_datetime(x[1]), format="%Y%m%d")
-    te_api <- strftime(as_datetime(x[2]), format="%Y%m%d")
-    log_debug("downloading data for station {station} for time range {ts_api} -  {te_api}")
-
-    d <- data.frame()
-    for(i in streams) {
-        m <- streams_desc %>% filter(datastream_id == i) %>%
-            pull(kit_id_ext)
-        log_trace("getting stream {i} {m}")
-
-        res <- try(obs <- GetSamenMetenAPIobs(as.character(i),
-                                   station, ts_api, te_api))
-        if(!class(res) == "try-error") {
-            if(nrow(res) > 9 ) {
-            d <- bind_rows(d, obs)
-            }
-        } else {
-            log_debug("API Error in stream {station} - {i}")
-        }
-        #Sys.sleep(1) # don't hammer the API
-    }
-
-    if(nrow(d)>0) {
-        d <- d %>%
-            rename(station = kit_id) %>%
-            mutate(aggregation = 3600)
-    } else {
-        d <- NULL
-    }
-    log_debug("got {ifelse(is.null(d),'no',nrow(d))} measurements")
-    return(d)
-}
-
+# download_data_samenmeten <- function(x, station, conn ) {
+#
+#     streaminfo <- get_doc(type = "datastream", ref = station, conn)
+#     if(length(streaminfo) == 1 && is.na(streaminfo)) {
+#         log_warn("download_data_samenmeten: datastream {station} is empty") 
+#         return(NULL)
+#     } else {
+#         streams <- streaminfo %>% pull(datastream_id)
+#         streams_desc <- streaminfo %>% select(datastream_id, kit_id_ext)
+#     }
+#
+#     ts_api <- strftime(as_datetime(x[1]), format="%Y%m%d")
+#     te_api <- strftime(as_datetime(x[2]), format="%Y%m%d")
+#     log_debug("downloading data for station {station} for time range {ts_api} -  {te_api}")
+#
+#     d <- data.frame()
+#     for(i in streams) {
+#         m <- streams_desc %>% filter(datastream_id == i) %>%
+#             pull(kit_id_ext)
+#         log_trace("getting stream {i} {m}")
+#
+#         res <- try(obs <- GetSamenMetenAPIobs(as.character(i),
+#                                    station, ts_api, te_api))
+#         if(!class(res) == "try-error") {
+#             if(nrow(res) > 9 ) {
+#             d <- bind_rows(d, obs)
+#             }
+#         } else {
+#             log_debug("API Error in stream {station} - {i}")
+#         }
+#         #Sys.sleep(1) # don't hammer the API
+#     }
+#
+#     if(nrow(d)>0) {
+#         d <- d %>%
+#             rename(station = kit_id) %>%
+#             mutate(aggregation = 3600)
+#     } else {
+#         d <- NULL
+#     }
+#     log_debug("got {ifelse(is.null(d),'no',nrow(d))} measurements")
+#     return(d)
+# }
+#
 
 download_data_knmi <- function(x, station, conn) {
 

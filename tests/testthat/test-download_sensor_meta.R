@@ -1,6 +1,6 @@
 
 # make sure we start with a clean database
-pool::poolClose(dbconn)
+try(pool::poolClose(dbconn))
 reset_db(fname_db)
 dbconn <- pool::dbPool(drv = RSQLite::SQLite(),
                        dbname = fname_db)
@@ -56,7 +56,7 @@ test_that("download_sensor_meta project", {
 
 
 # make sure we start with a clean database
-pool::poolClose(dbconn)
+try(pool::poolClose(dbconn))
 reset_db(fname_db)
 dbconn <- pool::dbPool(drv = RSQLite::SQLite(),
                        dbname = fname_db)
