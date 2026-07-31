@@ -1,6 +1,7 @@
 # Create test datasets
 
 #Create sensor dataset
+# remotes::install_github('rivm-syso/samanapir', ref = 'add_httr2_incl_tests', force = TRUE)
 library(samanapir)
 library(ATdatabase) # shouldn't be loaded, see issue 23 ATdatabase
 
@@ -34,8 +35,8 @@ test_municipality <- "Amersfoort"
 
 
 gemid <- municipalities  |> 
-    filter(name == test_municipality)  |> 
-    pull(code)  |> 
+    dplyr::filter(name == test_municipality)  |> 
+    dplyr::pull(code)  |> 
     as.character()
 
 municipinfo_amersfoort <- samanapir::GetSamenMetenAPIinfoMuni(gemid)

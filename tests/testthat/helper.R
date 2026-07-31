@@ -9,7 +9,7 @@ list_doc_types <- function(conn) {
     qry <- glue::glue_sql("SELECT DISTINCT type FROM meta;",
                           .con = conn)
     res <- DBI::dbGetQuery(conn, qry) |>
-        pull(type)
+        dplyr::pull(type)
     return(res)
 
 }

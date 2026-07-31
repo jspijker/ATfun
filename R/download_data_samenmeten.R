@@ -8,7 +8,7 @@ download_data_samenmeten <- function(x, station, conn) {
         return(NULL)
     } else {
         streams <- streaminfo |>
-            pull(datastream_id)
+            dplyr::pull(datastream_id)
     }
 
     ts_api <- strftime(lubridate::as_datetime(x[1]), format = "%Y%m%d")

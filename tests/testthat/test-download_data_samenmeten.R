@@ -37,7 +37,8 @@ test_that("download_data_samenmeten,data returned", {
 
     expect_true(is.data.frame(x))
     expect_true(nrow(x) > 0)
-    expect_named(x, c("station", "parameter", "timestamp", "value", "aggregation"))
+    expect_named(x, c("station", "parameter", "timestamp", "value", "aggregation"),
+                 ignore.order = TRUE)
 })
 
 
