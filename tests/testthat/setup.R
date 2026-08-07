@@ -11,8 +11,10 @@ library(DBI)
 library(ATdatabase)
 library(logger)
 library(tibble)
+library(lubridate)
+library(tidyr)
 
-# defailt values
+# default values
 ###################################################################
 
 # select randow date range, a week long period in the past
@@ -27,6 +29,12 @@ project <- "Amersfoort"
 
 # set default LML station
 lmlstation <- "NL49680"
+
+# set default KNMI station
+knmistation <- "260"
+
+# Set token for knmi api
+Sys.setenv(KNMI_API_TOKEN = "")
 
 # set default municipality
 municipality <- "Amersfoort"
