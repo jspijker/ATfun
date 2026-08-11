@@ -1,4 +1,14 @@
-
+#' Download the data from Luchtmeetnet 
+#'
+#' @param x vector with the times, example c("20260501", "20260502")
+#' @param station name of the station (string)
+#' @param conn database connection
+#'
+#' @returns dataframe wirth the columns ("station", "value", "timestamp", 
+#' "parameter", "timestamp_measured_start", "timestamp_measured_end", "aggregation"))
+#' @export
+#'
+#' @examples lml_data <- download_data_lml(c("20260501", "20260502"), "NL49680")
 download_data_lml <- function(x, station) {
 
     ts_api <- strftime(lubridate::as_datetime(x[1]), format = "%Y%m%d")
@@ -14,10 +24,13 @@ download_data_lml <- function(x, station) {
         # Return empty dataframe if station returns no data
 
         lml_data <- data.frame(matrix(ncol = 5, nrow = 0))
-        colnames(lml_data) <- c("station", "value", "timestamp", "parameter", "aggregation")
+        colnames(lml_data) <- c("station", "value", "timestamp", 
+                                "parameter", "aggregation")
     } else {
         lml_data <- lml_data |>
-            dplyr::rename("station" = "station_number", "timestamp" = "timestamp_measured", "parameter" = "formula") |>
+            dplyr::rename("station" = "station_number", 
+                          "timestamp" = "timestamp_measured", 
+                          "parameter" = "formula") |>
             tidyr::drop_na() |>
             dplyr::mutate(aggregation = 3600) |>
             dplyr::mutate(parameter = tolower(parameter))
@@ -26,6 +39,18 @@ download_data_lml <- function(x, station) {
 }
 
 
+#' Wrapper around GetLMLstatdataAPI
+#' This function is a wrapper around GetLMLstatdataAPI and includes
+#' the other input variables, like token, parameter and data_result.
+#'
+#' see samanapir::GetLMLstatdataAPI for the full info
+#'
+#' @param station station name
+#' @param ts_api start date
+#' @param te_api end date
+#'
+#' @returns dataframe 
+#' @export
 wrap_GetLMLstatdataAPI <- function(station, ts_api, te_api) {
-    return(samanapir::GetLMLstatdataAPI(station, ts_api, te_api))
+    return(samanapir::GetLMLstatdataAPI2(station, ts_api, te_api))
 }

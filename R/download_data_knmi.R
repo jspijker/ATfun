@@ -1,3 +1,14 @@
+#' Download the data from KNMI 
+#'
+#' @param x vector with the times, example c("20260501", "20260502")
+#' @param station name of the station (string)
+#' @param conn database connection
+#'
+#' @returns dataframe wirth the columns c("station", "value", "timestamp",
+#' "parameter", "aggregation")
+#' @export
+#'
+#' @examples knmi_data <- download_data_knmi_edr(c("20260501", "20260502"), "KNMI_260")
 download_data_knmi <- function(x, station, conn) {
   
   ts_api <- strftime(as_datetime(x[1]), format="%Y%m%d")
@@ -33,6 +44,18 @@ download_data_knmi <- function(x, station, conn) {
   
 }
 
+#' Wrapper around GetKNMIAPI
+#' This function is a wrapper around GetKNMIAPI and includes
+#' the other input variables, like token, parameter and data_result.
+#'
+#' see samanapir::GetKNMIAPI for the full info
+#'
+#' @param station station name
+#' @param ts_api start date
+#' @param te_api end date
+#'
+#' @returns dataframe 
+#' @export
 wrap_GetKNMIAPI <- function(station, ts_api, te_api) {
   return(samanapir::GetKNMIAPI(station, ts_api, te_api))
 }

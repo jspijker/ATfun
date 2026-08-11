@@ -9,6 +9,21 @@
 #    conn: db connection object
 
 
+#' Download meta data sensor Samen Meten
+#' This function downloads a set of sensors belonging to either a
+#' project or municipality,  download the station meta data, and 
+#' downloads the measurements for the requested time range
+#' The type arguments determine if data is requested for a
+#' municpality or a project.
+#' @param name name of project or municipality
+#' @param type either 'project' or 'municipality'
+#' @param conn db connection object
+#'
+#' @returns df with the columns c("station", "parameter", 
+#' "timestamp", "value", "aggregation")
+#' @export 
+#'
+#' @examples  download_sensor_meta("Amersfoort", type = "municipality", conn = dbconn)
 download_sensor_meta <- function(name, type, conn) {
 
     switch(type,

@@ -9,9 +9,6 @@
 #' municipality code to fetch the data and stores it in the database.
 
 #' @export
-
-
-
 api_get_municipality_info <- function(municipality, conn) {
     # gets municipality info from the API
     # arguments:
@@ -29,11 +26,17 @@ api_get_municipality_info <- function(municipality, conn) {
     return(muni_info)
 }
 
+#' Wrapper around GetSamenMetenAPIinfoMuni
+#' This function is a wrapper around samanapir::GetSamenMetenAPIinfoMuni
+#' mostly for testing
+#' 
+#' See samanapir::GetSamenMetenAPIinfoMuni, for more info
+#' 
+#' @param gemid municipality code
+#'
+#' @returns list
+#' @export
 wrap_GetSamenMetenAPIinfoMuni <- function(gemid) {
-    # wrapper around samanapir::GetSamenMetenAPIinfoMuni
-    # arguments:
-    #   gemid: municipality code
     muni_info <- samanapir::GetSamenMetenAPIinfoMuni(gemid)
     return(muni_info)
 }
-
