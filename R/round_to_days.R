@@ -5,7 +5,7 @@
 #' @param time_start string with start time (POSIXct)
 #' @param time_end string with end time (POSIXct)
 #'
-#' @returns
+#' @returns c("time_start","time_end") with values rounded by day
 #' @export
 #'
 #' @examples
