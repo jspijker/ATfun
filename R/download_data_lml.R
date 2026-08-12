@@ -39,11 +39,11 @@ download_data_lml <- function(x, station) {
 }
 
 
-#' Wrapper around GetLMLstatdataAPI
-#' This function is a wrapper around GetLMLstatdataAPI and includes
+#' Wrapper around GetLMLstatdataAPI2
+#' This function is a wrapper around GetLMLstatdataAPI2 and includes
 #' the other input variables, like token, parameter and data_result.
 #'
-#' see samanapir::GetLMLstatdataAPI for the full info
+#' see samanapir::GetLMLstatdataAPI2 for the full info
 #'
 #' @param station station name
 #' @param ts_api start date

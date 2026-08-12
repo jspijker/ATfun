@@ -19,5 +19,5 @@ wrap_GetKNMIAPI(station, ts_api, te_api)
 dataframe
 }
 \description{
-see samanapir::GetKNMIAPI for the full info
+see samanapir::GetKNMIAPI2 for the full info
 }

@@ -8,7 +8,7 @@ local_mocked_bindings(wrap_GetKNMIAPI = function(station, ts_api, te_api) {
 })
 
 test_that("download_locations_knmi() works", {
-  x <- download_locations_knmi(knmistation, xdate[1], xdate[2])
+  x <- download_location_knmi(knmistation, xdate[1], xdate[2])
   expect_true(is.data.frame(x))
   expect_named(object = x, expected = c("station", "lat", "lon"),
                ignore.order = TRUE)
@@ -24,6 +24,6 @@ local_mocked_bindings(wrap_GetKNMIAPI = function(station, ts_api, te_api) {
 })
 
 test_that("download_locations_knmi() returns null", {
-  x <- download_locations_knmi(knmistation, xdate[1], xdate[2])
+  x <- download_location_knmi(knmistation, xdate[1], xdate[2])
   expect_true(is.null(x))
 })

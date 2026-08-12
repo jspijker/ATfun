@@ -1,5 +1,3 @@
-
-
 download_data_samenmeten <- function(x, station, conn) {
 
     streaminfo <- ATdatabase::get_doc(type = "datastream", ref = station, conn)
@@ -59,6 +57,6 @@ download_data_samenmeten <- function(x, station, conn) {
 
 
 wrap_GetSamenMetenAPIobs <- function(stream, station, ts_api, te_api) {
-    x <- samanapir::GetSamenMetenAPIobs(stream, station, ts_api, te_api)
+    x <- samanapir::GetSamenMetenAPIobs2(stream, station, ts_api, te_api)
     return(x)
 }

@@ -27,16 +27,16 @@ api_get_municipality_info <- function(municipality, conn) {
 }
 
 #' Wrapper around GetSamenMetenAPIinfoMuni
-#' This function is a wrapper around samanapir::GetSamenMetenAPIinfoMuni
+#' This function is a wrapper around samanapir::GetSamenMetenAPIinfoMuni2
 #' mostly for testing
 #' 
-#' See samanapir::GetSamenMetenAPIinfoMuni, for more info
+#' See samanapir::GetSamenMetenAPIinfoMuni2, for more info
 #' 
 #' @param gemid municipality code
 #'
 #' @returns list
 #' @export
 wrap_GetSamenMetenAPIinfoMuni <- function(gemid) {
-    muni_info <- samanapir::GetSamenMetenAPIinfoMuni(gemid)
+    muni_info <- samanapir::GetSamenMetenAPIinfoMuni2(gemid)
     return(muni_info)
 }

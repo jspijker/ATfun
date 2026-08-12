@@ -3,7 +3,7 @@
 \name{wrap_GetSamenMetenAPIinfoMuni}
 \alias{wrap_GetSamenMetenAPIinfoMuni}
 \title{Wrapper around GetSamenMetenAPIinfoMuni
-This function is a wrapper around samanapir::GetSamenMetenAPIinfoMuni
+This function is a wrapper around samanapir::GetSamenMetenAPIinfoMuni2
 mostly for testing}
 \usage{
 wrap_GetSamenMetenAPIinfoMuni(gemid)
@@ -15,5 +15,5 @@ wrap_GetSamenMetenAPIinfoMuni(gemid)
 list
 }
 \description{
-See samanapir::GetSamenMetenAPIinfoMuni, for more info
+See samanapir::GetSamenMetenAPIinfoMuni2, for more info
 }

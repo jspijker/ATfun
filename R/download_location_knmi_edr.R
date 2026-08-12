@@ -8,8 +8,8 @@
 #' @export
 #'
 #' @examples download_location_knmi_edr("KNMI_260",
-#' as_datetime("2022-01-01 00:00:00"),
-#' as_datetime("2022-01-08 23:59:59") )
+#' lubridate::as_datetime("2022-01-01 00:00:00"),
+#' lubridate::as_datetime("2022-01-08 23:59:59") )
 download_location_knmi_edr <- function(knmi_station, time_start, time_end) {
   station_nr <- gsub(".*_", "", knmi_station)
   

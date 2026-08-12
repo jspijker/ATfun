@@ -2,8 +2,8 @@
 % Please edit documentation in R/download_data_lml.R
 \name{wrap_GetLMLstatdataAPI}
 \alias{wrap_GetLMLstatdataAPI}
-\title{Wrapper around GetLMLstatdataAPI
-This function is a wrapper around GetLMLstatdataAPI and includes
+\title{Wrapper around GetLMLstatdataAPI2
+This function is a wrapper around GetLMLstatdataAPI2 and includes
 the other input variables, like token, parameter and data_result.}
 \usage{
 wrap_GetLMLstatdataAPI(station, ts_api, te_api)
@@ -19,5 +19,5 @@ wrap_GetLMLstatdataAPI(station, ts_api, te_api)
 dataframe
 }
 \description{
-see samanapir::GetLMLstatdataAPI for the full info
+see samanapir::GetLMLstatdataAPI2 for the full info
 }

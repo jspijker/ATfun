@@ -23,7 +23,7 @@
 #' "timestamp", "value", "aggregation")
 #' @export 
 #'
-#' @examples  download_sensor_meta("Amersfoort", type = "municipality", conn = dbconn)
+# @examples  download_sensor_meta("Amersfoort", type = "municipality", conn = dbconn)
 download_sensor_meta <- function(name, type, conn) {
 
     switch(type,

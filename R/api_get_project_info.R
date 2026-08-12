@@ -16,10 +16,10 @@ api_get_project_info <- function(project, conn) {
 }
 
 #' Wrapper around GetSamenMetenAPIinfoProject
-#' This function is a wrapper around samanapir::GetSamenMetenAPIinfoProject
+#' This function is a wrapper around samanapir::GetSamenMetenAPIinfoProject2
 #' mostly for testing
 #' 
-#' See samanapir::GetSamenMetenAPIinfoProject, for more info
+#' See samanapir::GetSamenMetenAPIinfoProject2, for more info
 #' 
 #' @param project project name
 #'
@@ -27,5 +27,5 @@ api_get_project_info <- function(project, conn) {
 #' @export
 # create wrapper for samanapir function to allow for testing
 wrap_GetSamenMetenAPIinfoProject <- function(project) {
-    return(samanapir::GetSamenMetenAPIinfoProject(project))
+    return(samanapir::GetSamenMetenAPIinfoProject2(project))
 }

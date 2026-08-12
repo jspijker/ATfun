@@ -30,6 +30,3 @@ downloads the measurements for the requested time range
 The type arguments determine if data is requested for a
 municpality or a project.
 }
-\examples{
- download_sensor_meta("Amersfoort", type = "municipality", conn = dbconn)
-}

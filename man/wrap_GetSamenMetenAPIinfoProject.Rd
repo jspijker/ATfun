@@ -3,7 +3,7 @@
 \name{wrap_GetSamenMetenAPIinfoProject}
 \alias{wrap_GetSamenMetenAPIinfoProject}
 \title{Wrapper around GetSamenMetenAPIinfoProject
-This function is a wrapper around samanapir::GetSamenMetenAPIinfoProject
+This function is a wrapper around samanapir::GetSamenMetenAPIinfoProject2
 mostly for testing}
 \usage{
 wrap_GetSamenMetenAPIinfoProject(project)
@@ -15,5 +15,5 @@ wrap_GetSamenMetenAPIinfoProject(project)
 list
 }
 \description{
-See samanapir::GetSamenMetenAPIinfoProject, for more info
+See samanapir::GetSamenMetenAPIinfoProject2, for more info
 }
