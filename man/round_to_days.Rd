@@ -23,8 +23,3 @@ the samen meten API requires time ranges in full days. This
 function rounds any time to the start of the day of time_start
 until the end of the day of time_end
 }
-\examples{
-time_start <- as_datetime("2022-01-01 00:00:00")
-time_end <- as_datetime("2022-01-08 23:59:59")
-round_to_days(time_start, time_end)
-}

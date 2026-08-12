@@ -10,9 +10,6 @@
 
 #' @export
 api_get_municipality_info <- function(municipality, conn) {
-    # gets municipality info from the API
-    # arguments:
-    #   municipality: name of the municipality
 
     gemid <- municipalities |>
           dplyr::filter(name == municipality) |>

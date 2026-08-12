@@ -8,10 +8,10 @@
 #' @returns c("time_start","time_end") with values rounded by day
 #' @export
 #'
-#' @examples
-#' time_start <- as_datetime("2022-01-01 00:00:00")
-#' time_end <- as_datetime("2022-01-08 23:59:59")
-#' round_to_days(time_start, time_end)
+# @examples
+# time_start <- as_datetime("2022-01-01 00:00:00")
+# time_end <- as_datetime("2022-01-08 23:59:59")
+# round_to_days(time_start, time_end)
 round_to_days <- function(time_start, time_end) {
 
   ts <- floor_date(time_start, unit = "day")

@@ -2,7 +2,6 @@
 #'
 #' @param x vector with the times, example c("20260501", "20260502")
 #' @param station name of the station (string)
-#' @param conn database connection
 #'
 #' @returns dataframe wirth the columns ("station", "value", "timestamp", 
 #' "parameter", "timestamp_measured_start", "timestamp_measured_end", "aggregation"))
