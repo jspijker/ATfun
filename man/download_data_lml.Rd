@@ -10,8 +10,6 @@ download_data_lml(x, station)
 \item{x}{vector with the times, example c("20260501", "20260502")}
 
 \item{station}{name of the station (string)}
-
-\item{conn}{database connection}
 }
 \value{
 dataframe wirth the columns ("station", "value", "timestamp",
@@ -21,5 +19,5 @@ dataframe wirth the columns ("station", "value", "timestamp",
 Download the data from Luchtmeetnet
 }
 \examples{
-lml_data <- download_data_lml(c("20260501", "20260502"), "NL49680")
+\dontrun{lml_data <- download_data_lml(c("20260501", "20260502"), "NL49680")}
 }

@@ -30,4 +30,5 @@ Imports:
     RSQLite,
     samanapir,
     tibble,
-    tidyr
+    tidyr,
+    utils

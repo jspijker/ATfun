@@ -7,7 +7,8 @@
 #' "parameter", "timestamp_measured_start", "timestamp_measured_end", "aggregation"))
 #' @export
 #'
-#' @examples lml_data <- download_data_lml(c("20260501", "20260502"), "NL49680")
+#' @examples 
+#' \dontrun{lml_data <- download_data_lml(c("20260501", "20260502"), "NL49680")}
 download_data_lml <- function(x, station) {
 
     ts_api <- strftime(lubridate::as_datetime(x[1]), format = "%Y%m%d")

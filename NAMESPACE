@@ -12,6 +12,7 @@ export(get_database_dirname)
 export(get_database_path)
 export(get_stations_from_selection)
 export(list_doc)
+export(reset_db)
 export(round_to_days)
 export(set_loglevel)
 export(station_exists)
@@ -42,6 +43,7 @@ importFrom(glue,
 )
 importFrom(here,here)
 importFrom(logger,
+  formatter_pander,
   log_debug,
   log_info,
   log_threshold,
@@ -49,6 +51,7 @@ importFrom(logger,
   log_warn
 )
 importFrom(lubridate,
+  as_date,
   as_datetime,
   ceiling_date,
   days,
@@ -75,3 +78,4 @@ importFrom(tidyr,
   drop_na,
   pivot_longer
 )
+importFrom(utils,globalVariables)

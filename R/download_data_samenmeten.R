@@ -24,7 +24,7 @@ download_data_samenmeten <- function(x, station, conn) {
         res <- try(obs <- wrap_GetSamenMetenAPIobs(as.character(i),
                                                    station, ts_api, te_api))
 
-        if (class(res) == "try-error") {
+        if (inherits(res, "try-error")) {
             logger::log_warn("download_data_samenmeten: error in API call {station} - {i}")
             obs <- NULL 
         }
