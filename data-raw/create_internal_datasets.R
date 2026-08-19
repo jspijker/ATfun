@@ -1,11 +1,12 @@
-# Create test datasets
-
-#Create sensor dataset ----
-remotes::install_github('rivm-syso/samanapir', ref = 'add_httr2_incl_tests', force = TRUE)
-remotes::install_github('rivm-syso/ATdatabase')
-
-library(samanapir)
-library(ATdatabase) # shouldn't be loaded, see issue 23 ATdatabase
+######################################################################
+# This script creates internal datasets for the package. These
+# datasets are not exported and are used for testing and examples
+# within the package.
+#
+# PREREQUISITES:
+# - The packages 'samanapir' and 'ATdatabase' must be installed from GitHub.
+# - both packages must be loaded in the R session.
+# - The user must have a valid KNMI API token set in the environment variable 'KNMI_API_TOKEN
 
 ###################################
 # project info Amersfoort ----
@@ -49,10 +50,7 @@ ts_api <- strftime(lubridate::as_datetime(x[1]), format = "%Y%m%d")
 te_api <- strftime(lubridate::as_datetime(x[2]), format = "%Y%m%d")
 knmistation <- "260"
 
-# Set token for knmi api
-Sys.setenv(KNMI_API_TOKEN = ""
-)
-
+# Set token for knmi api here using Sys.setenv(KNMI_API_TOKEN = "YOUR_TOKEN")
 
 knmi_edr_example <- samanapir::GetKNMIAPIEDR(date_start = ts_api,
                                              date_end = te_api, 
@@ -79,11 +77,6 @@ gemid <- municipalities  |>
     as.character()
 
 municipinfo_amersfoort <- samanapir::GetSamenMetenAPIinfoMuni2(gemid)
-
-
-
-
-
 
 sm_station <- "SMC_16554"
 sm_streams  <- c(52429, 52428, 52427, 52426)
