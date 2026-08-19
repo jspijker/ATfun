@@ -18,7 +18,7 @@ download_location_knmi <- function(knmi_station, time_start, time_end) {
                                              format(time_start, '%Y%m%d'), 
                                              format(time_end, '%Y%m%d'))
   if(is.null(knmi_stations_all)){
-    logger::log_info("downloadknmi: no connection")
+    logger::log_info("download_location_knmi: no response from API for station {knmi_station} in time range {time_start} -  {time_end}")
     return(NULL)
   }else{
     knmi_station_location <- knmi_stations_all$info  |> 

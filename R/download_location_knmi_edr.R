@@ -16,7 +16,7 @@ download_location_knmi_edr <- function(knmi_station, time_start, time_end) {
   knmi_stations_all <- wrap_GetKNMIAPIEDR(station_nr, format(time_start, '%Y%m%d'), 
                                              format(time_end, '%Y%m%d'))
   if(is.null(knmi_stations_all)){
-    logger::log_info("downloadknmi: no connection")
+    logger::log_info("download_location_knmi_edr: no response from API for station {knmi_station} in time range {time_start} -  {time_end}")
     return(NULL)
   }else{
     knmi_stations_locations <- knmi_stations_all |> 

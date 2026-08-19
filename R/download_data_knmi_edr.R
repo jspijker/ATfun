@@ -22,26 +22,27 @@ download_data_knmi_edr <- function(x, station, conn) {
 
   # Check the result of API and adjust
   if(is.null(knmi_all)){
-    logger::log_info("downloadknmiedr: no connection")
-    return(NULL)
+      logger::log_info("Download_data_knmi_edr: no response from API for station {station} in time range {ts_api} -  {te_api}")
+      return(NULL)
   }else if(length(knmi_all) == 0){
-    logger::log_info("downloadknmiedr: no data")
-    # Return empty dataframe if station returns no data
-    knmi_measurements <- data.frame(matrix(ncol = 5, nrow = 0))
-    colnames(knmi_measurements) <- c("station", "value", "timestamp",
-                                     "parameter", "aggregation")
-    return()
+      logger::log_info("Download_data_knmi_edr: no data received for station {station} in time range {ts_api} -  {te_api}")
+      # Return empty dataframe if station returns no data
+      knmi_measurements <- data.frame(matrix(ncol = 5, nrow = 0))
+      colnames(knmi_measurements) <- c("station", "value", "timestamp",
+                                       "parameter", "aggregation")
+      return()
   }else{
-    knmi_measurements <- knmi_all |> dplyr::mutate(
-      parameter = case_when(parameter_name == "ffs" ~ "ws",
-                            parameter_name == "dd" ~ "wd"), 
-      station = paste0("KNMI_", id_nr),
-      timestamp = date_time,
-      aggregation = 3600,
-      value = values
-    ) |> dplyr::select(c(parameter, station, timestamp, aggregation, value))
-  
-    return(knmi_measurements)
+      knmi_measurements <- knmi_all |> 
+          plyr::mutate(parameter = case_when(parameter_name == "ffs" ~ "ws",
+                                             parameter_name == "dd" ~ "wd"), 
+                       station = paste0("KNMI_", id_nr),
+                       timestamp = date_time,
+                       aggregation = 3600,
+                       value = values
+                       ) |>
+          dplyr::select(c(parameter, station, timestamp, aggregation, value))
+
+      return(knmi_measurements)
   }
   
 }
