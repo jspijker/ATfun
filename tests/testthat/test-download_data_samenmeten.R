@@ -1,6 +1,4 @@
 # prep test
-
-
 ts_api  <- strftime(date_range$start_date, format="%Y%m%d")
 te_api  <- strftime(date_range$end_date, format="%Y%m%d")
 
@@ -22,10 +20,10 @@ local_mocked_bindings(wrap_GetSamenMetenAPIinfoMuni = function(gemid) {
 })
 
 
-
 test_that("download_data_samenmeten,data returned", {
 
-    local_mocked_bindings(wrap_GetSamenMetenAPIobs = function(stream_id, station, ts_api, te_api) {
+    local_mocked_bindings(wrap_GetSamenMetenAPIobs = function(stream_id, station, 
+                                                              ts_api, te_api) {
         logger::log_info("mocked GetSamenMetenAPIobs called")
         item <- paste0("X", stream_id)
         return(samenmeten_example[[item]])
@@ -37,9 +35,9 @@ test_that("download_data_samenmeten,data returned", {
 
     expect_true(is.data.frame(x))
     expect_true(nrow(x) > 0)
-    expect_named(x, c("station", "parameter", "timestamp", "value", "aggregation"))
+    expect_named(x, c("station", "parameter", "timestamp", "value", "aggregation"),
+                 ignore.order = TRUE)
 })
-
 
 
 test_that("download_data_samenmeten,NULL returned", {

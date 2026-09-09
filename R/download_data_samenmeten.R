@@ -1,5 +1,3 @@
-
-
 download_data_samenmeten <- function(x, station, conn) {
 
     streaminfo <- ATdatabase::get_doc(type = "datastream", ref = station, conn)
@@ -8,7 +6,7 @@ download_data_samenmeten <- function(x, station, conn) {
         return(NULL)
     } else {
         streams <- streaminfo |>
-            pull(datastream_id)
+            dplyr::pull(datastream_id)
     }
 
     ts_api <- strftime(lubridate::as_datetime(x[1]), format = "%Y%m%d")
@@ -26,7 +24,7 @@ download_data_samenmeten <- function(x, station, conn) {
         res <- try(obs <- wrap_GetSamenMetenAPIobs(as.character(i),
                                                    station, ts_api, te_api))
 
-        if (class(res) == "try-error") {
+        if (inherits(res, "try-error")) {
             logger::log_warn("download_data_samenmeten: error in API call {station} - {i}")
             obs <- NULL 
         }
@@ -59,6 +57,6 @@ download_data_samenmeten <- function(x, station, conn) {
 
 
 wrap_GetSamenMetenAPIobs <- function(stream, station, ts_api, te_api) {
-    x <- samanapir::GetSamenMetenAPIobs(stream, station, ts_api, te_api)
+    x <- samanapir::GetSamenMetenAPIobs2(stream, station, ts_api, te_api)
     return(x)
 }
