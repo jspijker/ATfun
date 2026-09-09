@@ -32,7 +32,6 @@ api_get_municipality_info <- function(municipality, conn) {
 #' @param gemid municipality code
 #'
 #' @returns list
-#' @export
 wrap_GetSamenMetenAPIinfoMuni <- function(gemid) {
     muni_info <- samanapir::GetSamenMetenAPIinfoMuni2(gemid)
     return(muni_info)

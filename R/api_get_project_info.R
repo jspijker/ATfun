@@ -24,7 +24,6 @@ api_get_project_info <- function(project, conn) {
 #' @param project project name
 #'
 #' @returns list
-#' @export
 # create wrapper for samanapir function to allow for testing
 wrap_GetSamenMetenAPIinfoProject <- function(project) {
     return(samanapir::GetSamenMetenAPIinfoProject2(project))

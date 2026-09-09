@@ -50,7 +50,6 @@ download_data_lml <- function(x, station) {
 #' @param te_api end date
 #'
 #' @returns dataframe 
-#' @export
 wrap_GetLMLstatdataAPI <- function(station, ts_api, te_api) {
     return(samanapir::GetLMLstatdataAPI2(station, ts_api, te_api))
 }

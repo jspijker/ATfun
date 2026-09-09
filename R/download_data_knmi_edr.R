@@ -61,7 +61,6 @@ download_data_knmi_edr <- function(x, station, conn) {
 #' date_time (posixct), id_nr(character), parameter_name (character),
 #'  result_type (character), lat (numeric), lon(numeric). If not succesful
 #'  call then NULL is returned
-#' @export
 wrap_GetKNMIAPIEDR <- function(station, ts_api, te_api) {
   return(samanapir::GetKNMIAPIEDR(date_start = ts_api,
                                   date_end = te_api, 

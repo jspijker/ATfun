@@ -16,11 +16,6 @@ export(reset_db)
 export(round_to_days)
 export(set_loglevel)
 export(station_exists)
-export(wrap_GetKNMIAPI)
-export(wrap_GetKNMIAPIEDR)
-export(wrap_GetLMLstatdataAPI)
-export(wrap_GetSamenMetenAPIinfoMuni)
-export(wrap_GetSamenMetenAPIinfoProject)
 importFrom(ATdatabase,
   add_doc,
   create_database_tables,

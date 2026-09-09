@@ -58,7 +58,6 @@ download_data_knmi <- function(x, station, conn) {
 #' @param te_api end date
 #'
 #' @returns dataframe 
-#' @export
 wrap_GetKNMIAPI <- function(station, ts_api, te_api) {
   return(samanapir::GetKNMIAPI2(station, ts_api, te_api))
 }
