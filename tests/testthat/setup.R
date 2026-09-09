@@ -7,12 +7,6 @@
 #
 #######################################################################
 
-library(DBI)
-library(ATdatabase)
-library(logger)
-library(tibble)
-library(lubridate)
-library(tidyr)
 
 # default values
 ###################################################################
@@ -33,8 +27,8 @@ lmlstation <- "NL49680"
 # set default KNMI station
 knmistation <- "260"
 
-# Set token for knmi api
-Sys.setenv(KNMI_API_TOKEN = "")
+# Set token for knmi api if you didn't had already:
+# Sys.setenv(KNMI_API_TOKEN = "TEST_TOKEN_NOT_USED")
 
 # set default municipality
 municipality <- "Amersfoort"
@@ -47,4 +41,3 @@ reset_db <- reset_db(fname_db)
 
 dbconn <- pool::dbPool(drv = RSQLite::SQLite(),
                        dbname = fname_db)
-
