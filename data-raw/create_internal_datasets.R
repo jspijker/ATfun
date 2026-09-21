@@ -6,7 +6,8 @@
 # PREREQUISITES:
 # - The packages 'samanapir' and 'ATdatabase' must be installed from GitHub.
 # - both packages must be loaded in the R session.
-# - The user must have a valid KNMI API token set in the environment variable 'KNMI_API_TOKEN
+# - The user must have a valid KNMI API token set in the environment 
+#   variable 'KNMI_API_TOKEN'
 
 ###################################
 # project info Amersfoort ----
@@ -70,7 +71,6 @@ municipalities  <- read.csv(here::here("data-raw", "municipalities.csv"),
 
 test_municipality <- "Amersfoort"
 
-
 gemid <- municipalities  |> 
     dplyr::filter(name == test_municipality)  |> 
     dplyr::pull(code)  |> 
@@ -84,7 +84,9 @@ sm_streams  <- c(52429, 52428, 52427, 52426)
 obs <- list()
 for(i in sm_streams) {
     id <- paste0("X", i)
-    obs[[id]] <- samanapir::GetSamenMetenAPIobs2(as.character(i), sm_station, ts_api, te_api)
+    obs[[id]] <- samanapir::GetSamenMetenAPIobs2(as.character(i), 
+                                                 sm_station,
+                                                 ts_api, te_api)
 }
 samenmeten_example  <- obs
 #add attribute streams to samenmeten_example

@@ -19,7 +19,9 @@ importFrom(ATdatabase,
   add_doc,
   create_database_tables,
   doc_exists,
-  get_doc
+  get_doc,
+  insert_location_info,
+  download_data
 )
 importFrom(DBI,dbGetQuery)
 importFrom(RSQLite,SQLite)

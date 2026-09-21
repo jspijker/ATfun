@@ -78,7 +78,7 @@ insert_location_info_vectorized <- function(x, conn = conn) {
         dplyr::mutate(lat = as.numeric(lat)) |>
         dplyr::mutate(lon = as.numeric(lon))
     logger::log_trace("storing location info for {kit$kit_id}")
-    insert_location_info(station = kit$kit_id,
+    ATdatabase::insert_location_info(station = kit$kit_id,
                          lat = kit$lat,
                          lon = kit$lon,
                          conn)
