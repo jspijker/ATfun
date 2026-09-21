@@ -17,7 +17,7 @@ download_data_knmi_edr <- function(x, station, conn) {
   station_nr <- gsub(".*_", "", station)
   
   log_debug("downloading data for station {station_nr} for time range {ts_api} -  {te_api}")
-  browser()
+
   knmi_all <- wrap_GetKNMIAPIEDR(station_nr, ts_api, te_api)
 
   # Check the result of API and adjust
