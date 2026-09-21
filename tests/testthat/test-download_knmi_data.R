@@ -1,4 +1,3 @@
-
 # fixed data, check with raw-data/create_tests_datasets.R
 
 xdate <- c(date_range_fixed$start_date, date_range_fixed$end_date)
