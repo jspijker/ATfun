@@ -17,14 +17,14 @@
 #' municpality or a project.
 #' @param name name of project or municipality
 #' @param type either 'project' or 'municipality'
-#' @param conn db connection object
+#' @param conn db connection object, default = pool
 #'
 #' @returns df with the columns c("station", "parameter", 
 #' "timestamp", "value", "aggregation")
 #' @export 
 #'
 # @examples  download_sensor_meta("Amersfoort", type = "municipality", conn = dbconn)
-download_sensor_meta <- function(name, type, conn) {
+download_sensor_meta <- function(name, type, conn = pool) {
 
     switch(type,
            project = {

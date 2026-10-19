@@ -9,14 +9,14 @@ downloads the measurements for the requested time range
 The type arguments determine if data is requested for a
 municpality or a project.}
 \usage{
-download_sensor_meta(name, type, conn)
+download_sensor_meta(name, type, conn = pool)
 }
 \arguments{
 \item{name}{name of project or municipality}
 
 \item{type}{either 'project' or 'municipality'}
 
-\item{conn}{db connection object}
+\item{conn}{db connection object, default = pool}
 }
 \value{
 df with the columns c("station", "parameter",
